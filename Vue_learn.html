@@ -1,0 +1,53 @@
+<meta charset="utf-8">
+<script src="https://unpkg.com/vue"></script>
+<div id="app">
+	{{message}}
+	<br/>
+	<span v-bind:title='message'>鼠标悬停几秒钟查看此处动态绑定的提示信息！</span>
+	<br/>
+	<p v-if="seen">现在你看到我了</p>
+	<br/>
+	<ol>
+		<li v-for="todo in todos">{{todo.text}}</li>
+	</ol>
+	<br/>
+	<p>{{message}}</p>
+	<button v-on:click="reverseMessage">逆转消息</button>
+	<br/>
+	<input type="text" name="test_message" v-model='message'>
+	<br/>
+	<ol>
+		<todo-item
+			v-for="item in groceryList"
+			v-bind:todo="item"
+			v-bind:key="item.id"
+		></todo-item>
+	</ol>
+</div>
+<script type="text/javascript">
+	// registor
+	Vue.component('todo-item', { props:['todo'],
+		template: '<li>{{todo.text}}</li>'});
+	var app = new Vue({
+		el:'#app',
+		data:{
+			message:'Hello Vue!',
+			seen:true,
+			todos:[
+			{ text: 'learn javascript'},
+			{ text: 'learn Vue'},
+			{ text: "build a greate project" }
+			],
+			groceryList:[
+			{ id:0, text:"蔬菜"},
+			{ id:1,	text:"奶酪"},
+			{ id:2,	text:"随便其他什么人吃的东西"}
+			]
+		},
+		methods:{
+			reverseMessage:function(){
+				this.message = this.message.split('').reverse().join('');
+			}
+		}
+	});
+</script>

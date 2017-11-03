@@ -1,0 +1,23 @@
+<meta charset="utf-8">
+<script src="https://unpkg.com/vue"></script>
+<div id="app">
+	<h1>{{message}}</h1>
+</div>
+<div v-html="rawHtml">
+	{{message}}
+</div>
+<script type="text/javascript">
+	var data = {message:"hello,Vue!"}
+	var vm = new Vue({
+		el:"#app",
+		data:data,
+		created:function()
+		{
+			alert("hello, app is created.");
+		}
+	});
+	vm.$watch('message', function(newValue, oldValue)
+		{
+			alert( 'newValue is ' + newValue + ', oldValue is ' + oldValue);
+		});
+</script>
